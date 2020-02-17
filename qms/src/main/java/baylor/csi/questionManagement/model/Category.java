@@ -35,6 +35,8 @@ public class Category extends UUIDHashedEntityObject {
     @Size(min = 3)
     private String description;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private Set<Question> questions = new HashSet<>();
 
 
@@ -55,9 +57,6 @@ public class Category extends UUIDHashedEntityObject {
         this.description = description;
     }
 
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     public Set<Question> getQuestions() {
         return questions;
     }

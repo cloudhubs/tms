@@ -14,6 +14,11 @@ public class ConfigurationGroup extends UUIDHashedEntityObject {
     private Integer level;
     private Integer count;
     private Long languageId;
+    
+    @JsonIgnore
+    @NotNull
+    @ManyToOne
+    @JoinColumn(updatable = false)
     private Configuration configuration;
 
     public Long getCategory() {
@@ -48,10 +53,6 @@ public class ConfigurationGroup extends UUIDHashedEntityObject {
         this.languageId = languageId;
     }
 
-    @JsonIgnore
-    @NotNull
-    @ManyToOne
-    @JoinColumn(updatable = false)
     public Configuration getConfiguration() {
         return configuration;
     }

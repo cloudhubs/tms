@@ -11,8 +11,15 @@ import javax.validation.constraints.NotNull;
 @Table(name = "choice")
 @SequenceGenerator(initialValue = 1, allocationSize = 1, name = "idgen", sequenceName = "choice_id_seq")
 public class Choice extends UUIDHashedEntityObject {
+    
     private String body;
+
     private Boolean correct;
+
+    @JsonIgnore
+    @NotNull
+    @ManyToOne
+    @JoinColumn(updatable = false)
     private Question question;
 
     public String getBody() {
@@ -31,10 +38,6 @@ public class Choice extends UUIDHashedEntityObject {
         this.correct = correct;
     }
 
-    @JsonIgnore
-    @NotNull
-    @ManyToOne
-    @JoinColumn(updatable = false)
     public Question getQuestion() {
         return question;
     }

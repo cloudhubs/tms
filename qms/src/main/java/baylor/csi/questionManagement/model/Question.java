@@ -28,17 +28,34 @@ public class Question extends UUIDHashedEntityObject {
     public static final String FIND_DTO_BY_NAME = "FIND_DTO_BY_NAME";
     public static final String FIND_BY_CATEGORYID = "FIND_BY_CATEGORYID";
     public static final String FIND_BY_CATEGORYID_LEVEL_LANGUAGE = "FIND_BY_CATEGORYID_LEVEL_LANGUAGE";
-    private String title;
-    private Integer level;
-    private String body;
-    private Set<Choice> choices = new HashSet<>();
-    private Set<Code> codes = new HashSet<>();
-    private Set<Category> categories = new HashSet<>();
-
 
     @NotNull
     @Column(nullable = false)
     @Size(max = 256, min = 3)
+    private String title;
+
+    @NotNull
+    @Column(nullable = false)
+    @Min(1)@Max(5)
+    private Integer level;
+
+    @NotNull
+    @Column(nullable = false)
+    @Size(min = 3)
+    private String body;
+
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    private Set<Choice> choices = new HashSet<>();
+
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    private Set<Code> codes = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable
+    private Set<Category> categories = new HashSet<>();
+
+
+    
     public String getTitle() {
         return title;
     }
@@ -47,9 +64,7 @@ public class Question extends UUIDHashedEntityObject {
         this.title = title;
     }
 
-    @NotNull
-    @Column(nullable = false)
-    @Min(1)@Max(5)
+    
     public Integer getLevel() {
         return level;
     }
@@ -57,10 +72,7 @@ public class Question extends UUIDHashedEntityObject {
     public void setLevel(Integer level) {
         this.level = level;
     }
-
-    @NotNull
-    @Column(nullable = false)
-    @Size(min = 3)
+    
     public String getBody() {
         return body;
     }
@@ -69,7 +81,6 @@ public class Question extends UUIDHashedEntityObject {
         this.body = body;
     }
 
-    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     public Set<Choice> getChoices() {
         return choices;
     }
@@ -77,8 +88,7 @@ public class Question extends UUIDHashedEntityObject {
     public void setChoices(Set<Choice> choices) {
         this.choices = choices;
     }
-
-    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    
     public Set<Code> getCodes() {
         return codes;
     }
@@ -86,10 +96,7 @@ public class Question extends UUIDHashedEntityObject {
     public void setCodes(Set<Code> codes) {
         this.codes = codes;
     }
-
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable
+    
     public Set<Category> getCategories() {
         return categories;
     }

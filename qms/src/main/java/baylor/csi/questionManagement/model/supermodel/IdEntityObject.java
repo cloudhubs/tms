@@ -16,12 +16,15 @@ public class IdEntityObject extends AuditModel implements ICPCEntity {
      */
     private static final long serialVersionUID = 5553924130305731516L;
 
-    protected Long id;
-
-    protected Integer version = 0;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idgen")
+    protected Long id;
+
+    @XmlTransient
+    @JsonIgnore
+    @Version
+    protected Integer version = 0;
+
     public Long getId() {
         return id;
     }
@@ -30,9 +33,6 @@ public class IdEntityObject extends AuditModel implements ICPCEntity {
         this.id = id;
     }
 
-    @XmlTransient
-    @JsonIgnore
-    @Version
     public Integer getVersion() {
         return version;
     }
