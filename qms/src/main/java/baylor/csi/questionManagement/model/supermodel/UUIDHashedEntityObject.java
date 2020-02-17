@@ -22,6 +22,10 @@ public abstract class UUIDHashedEntityObject extends IdEntityObject implements C
      * of the methods {@link #getUUID()}, {@link #hashCode()} or {@link #equals(Object)}
      * is called.
      */
+    @JsonIgnore
+    @NotNull
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
+    @Column(nullable = false, unique = true)
     private UUID uuid;
 
     /**
@@ -29,10 +33,6 @@ public abstract class UUIDHashedEntityObject extends IdEntityObject implements C
      *
      * @return The UUID.
      */
-    @JsonIgnore
-    @NotNull
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @Column(nullable = false, unique = true)
     public UUID getUUID() {
         if (uuid == null) {
             uuid = UUID.randomUUID();

@@ -12,11 +12,21 @@ import javax.validation.constraints.Size;
 @Table(name = "code")
 @SequenceGenerator(initialValue = 1, allocationSize = 1, name = "idgen", sequenceName = "code_id_seq")
 public class Code extends UUIDHashedEntityObject {
+    @ManyToOne(fetch = FetchType.EAGER)
     private Language language;
+
+    @NotNull
+    @Column(nullable = false)
+    @Size(min = 3)
     private String body;
+
+    @JsonIgnore
+    @NotNull
+    @ManyToOne
+    @JoinColumn(updatable = false)
     private Question question;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    
     public Language getLanguage() {
         return language;
     }
@@ -25,9 +35,7 @@ public class Code extends UUIDHashedEntityObject {
         this.language = language;
     }
 
-    @NotNull
-    @Column(nullable = false)
-    @Size(min = 3)
+    
     public String getBody() {
         return body;
     }
@@ -35,11 +43,7 @@ public class Code extends UUIDHashedEntityObject {
     public void setBody(String body) {
         this.body = body;
     }
-
-    @JsonIgnore
-    @NotNull
-    @ManyToOne
-    @JoinColumn(updatable = false)
+    
     public Question getQuestion() {
         return question;
     }

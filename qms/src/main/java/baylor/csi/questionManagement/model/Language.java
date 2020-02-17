@@ -13,12 +13,11 @@ import java.util.Set;
 @SequenceGenerator(initialValue = 1, allocationSize = 1, name = "idgen", sequenceName = "language_id_seq")
 public class Language extends UUIDHashedEntityObject {
 
-    private String name;
-
-
     @NotNull
     @Column(nullable = false)
     @Size(max = 256, min = 3)
+    private String name;
+
     public String getName() {
         return name;
     }
