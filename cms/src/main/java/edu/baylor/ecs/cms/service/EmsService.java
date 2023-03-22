@@ -28,24 +28,19 @@ public class EmsService {
     private UmsService umsService;
 
     private final RestTemplate restTemplate;
+    private String TEST_URI = "https://www.newURI.org/test/";
 
     public EmsService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
     public Object createExam(ExamDto examDto) {
-
-//        if (!umsService.isExamineeIdValid(examDto.getExaminee())){
-//            return ResponseEntity.badRequest().body(null);
-//        }
-//        examDto.setIssuer(umsService.getCurrentLoggedInUser());
         String uri = ip + examContext;
         return this.restTemplate.postForObject(uri, examDto, ExamDto.class);
     }
 
     public List<Exam> getExams() {
         String uri = ip + examContext;
-        System.out.println(uri);
         Exam[] exams = this.restTemplate.getForObject(uri, Exam[].class);
         if (exams == null) {
             return null;
@@ -81,13 +76,14 @@ public class EmsService {
         return "Delete successful";
     }
 
-
-
-    //ToDo: CRUD
-
-//    public ResponseEntity<Object[]> updateExam(){
-//        String categoryInfoPath = qmsIp + categoryInfoContext;
-//        return restTemplate.getForEntity(categoryInfoPath, Object[].class);
-//    }
-
+    public String testCallWithURIVar(Integer id) {
+        String uri = "https://www.newURI.org/work";
+        Exam[] exams = this.restTemplate.getForObject(uri, Exam[].class);
+        return "testCallWithURIVar success!";
+    }
+    public String testCallWithOutsideVar(Integer id) {
+        
+        Exam[] exams = this.restTemplate.getForObject(this.TEST_URI + "A", Exam[].class);
+        return "testCallWithOutsideVar success!";
+    }
 }
