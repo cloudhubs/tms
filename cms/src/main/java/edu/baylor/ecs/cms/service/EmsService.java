@@ -76,14 +76,14 @@ public class EmsService {
         return "Delete successful";
     }
 
-    public String testCallWithURIVar(Integer id) {
-        String uri = "https://www.newURI.org/work";
-        Exam[] exams = this.restTemplate.getForObject(uri, Exam[].class);
-        return "testCallWithURIVar success!";
-    }
-    public String testCallWithOutsideVar(Integer id) {
+    // public String testCallWithURIVar(Integer id) {
+    //     String uri = "https://www.newURI.org/work";
+    //     Exam[] exams = this.restTemplate.getForObject(uri, Exam[].class);
+    //     return "testCallWithURIVar success!";
+    // }
+    // public String testCallWithOutsideVar(Integer id) {
         
-        Exam[] exams = this.restTemplate.getForObject(this.TEST_URI + "A", Exam[].class);
-        return "testCallWithOutsideVar success!";
-    }
+    //     Exam[] exams = this.restTemplate.getForObject(this.TEST_URI + "A", Exam[].class);
+    //     return "testCallWithOutsideVar success!";
+    // }
 }

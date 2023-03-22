@@ -43,7 +43,7 @@ public class ExamController {
 
 //    @PreAuthorize("hasAnyAuthority('ROLE_ems-frontend')")
     @CrossOrigin
-    @RequestMapping(value = "getByUsername/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getByUsername/{username}", method = RequestMethod.GET)
     public List<Exam> getByUserName(@PathVariable String username, @RequestHeader("Authorization") String authorization) {
         System.out.println("get by username");
         System.out.println(username);
